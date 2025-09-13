@@ -68,3 +68,23 @@ export function uploadImage({ file }) {
     return response.json();
   });
 }
+
+export function addPost(token, description, pictureUrl) {
+  const body = {
+    description: description,
+    imageUrl: pictureUrl,
+  }
+  // console.log("\nЭто тело запроса:");
+  // console.log(body);
+
+  return fetch(postsHost, {
+    method: "POST",
+    headers: {
+      Authorization: token,
+    },
+    body: JSON.stringify(body),
+  })
+    .then((response) => {
+      response.json();
+    })
+}
