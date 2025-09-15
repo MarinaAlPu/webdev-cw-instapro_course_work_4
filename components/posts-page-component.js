@@ -23,7 +23,7 @@ export function renderPostsPageComponent({ appEl }) {
       </div>
       <div class="post-likes">
         <button data-post-id="${post.id}" class="like-button">
-          <img src="./assets/images/like-active.svg">
+        <${post.likes.length > 0 ? 'img src="./assets/images/like-active.svg"' : 'img src="./assets/images/like-not-active.svg"'}>
         </button>
         <p class="post-likes-text">
           Нравится: <strong>${post.likes.length}</strong>
@@ -97,7 +97,7 @@ export function renderUserPostsPageComponent( appEl , userId) {
       </div>
       <div class="post-likes">
         <button data-post-id="${userPost.id}" class="like-button">
-          <img src="./assets/images/like-active.svg">
+        <${userPost.likes.length > 0 ? 'img src="./assets/images/like-active.svg"' : 'img src="./assets/images/like-not-active.svg"'}>
         </button>
         <p class="post-likes-text">
           Нравится: <strong>${userPost.likes.length}</strong>
