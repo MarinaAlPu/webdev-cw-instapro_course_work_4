@@ -85,6 +85,9 @@ export const goToPage = (newPage, data) => {
 
       return getUserPosts({ token: getToken() }, data.userId)
         .then((userPosts) => {
+          console.log("\nЭто userPosts в getUserPosts:");
+          console.log(userPosts);
+          
           page = USER_POSTS_PAGE;
           posts = userPosts;
 
