@@ -26,8 +26,8 @@ const getToken = () => {
 };
 
 export const getUserId = () => {
-  console.log(user);
-  console.log(user._id);
+  // console.log(user);
+  // console.log(user._id);
   const userId = user._id;
   return userId;
 };
@@ -75,21 +75,21 @@ export const goToPage = (newPage, data) => {
 
     if (newPage === USER_POSTS_PAGE) {
       // @@TODO: реализовать получение постов юзера из API
-      console.log("Открыть страницу пользователя: ", data.userId);
+      // console.log("Открыть страницу пользователя: ", data.userId);
       page = LOADING_PAGE;
       renderApp();
 
       const appEl = document.getElementById("app");
-      console.log("\nЭто appEl:");
-      console.log(appEl);
+      // console.log("\nЭто appEl:");
+      // console.log(appEl);
 
       return getUserPosts({ token: getToken() }, data.userId)
         .then((userPosts) => {
-          console.log("\nЭто data.userId в getUserPosts:");
-          console.log(data.userId);
+          // console.log("\nЭто data.userId в getUserPosts:");
+          // console.log(data.userId);
 
-          console.log("\nЭто userPosts в getUserPosts:");
-          console.log(userPosts);
+          // console.log("\nЭто userPosts в getUserPosts:");
+          // console.log(userPosts);
 
           page = USER_POSTS_PAGE;
           posts = userPosts;
