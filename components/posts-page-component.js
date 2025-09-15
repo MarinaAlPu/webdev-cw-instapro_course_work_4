@@ -70,26 +70,22 @@ export function renderUserPostsPageComponent( appEl , userId) {
   // @TODO: реализовать рендер постов из api
   console.log("Актуальный список постов в renderUserPostsPageComponent:", posts);
   
-  console.log("\nЭто appEl в функции:");
-  console.log(appEl);
+  // console.log("\nЭто appEl в функции:");
+  // console.log(appEl);
   
-  console.log("\nЭто userId в функции:");
+  console.log("\nЭто userId в renderUserPostsPageComponent:");
   console.log(userId);
   
-  // const userPostsFiltered = posts.filter((post) => post.user.id === userId);
-  // console.log("\nОтфильтрованняй список постов юзера:");
-  // console.log(userPostsFiltered);
-
-  // console.log(userPostsFiltered === posts);
-  
-  const userPosts = posts;
+  const userPostsFiltered = posts.filter((post) => post.user.id === userId);
+  console.log("\nОтфильтрованный список постов юзера в renderUserPostsPageComponent:");
+  console.log(userPostsFiltered);
 
   /**
    * @TODO: чтобы отформатировать дату создания поста в виде "19 минут назад"
    * можно использовать https://date-fns.org/v2.29.3/docs/formatDistanceToNow
   */
 
-  const userPostsHtml = userPosts.map((userPost) => {
+  const userPostsHtml = userPostsFiltered.map((userPost) => {
     return `
     <li class="post">
       <div class="post-header" data-user-id="${userPost.user.id}">

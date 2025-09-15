@@ -28,7 +28,7 @@ const getToken = () => {
 export const getUserId = () => {
   console.log(user);
   console.log(user._id);
-  const userId = user ? `Bearer ${user._id}` : undefined;
+  const userId = user._id;
   return userId;
 };
 
@@ -85,9 +85,12 @@ export const goToPage = (newPage, data) => {
 
       return getUserPosts({ token: getToken() }, data.userId)
         .then((userPosts) => {
+          console.log("\nЭто data.userId в getUserPosts:");
+          console.log(data.userId);
+
           console.log("\nЭто userPosts в getUserPosts:");
           console.log(userPosts);
-          
+
           page = USER_POSTS_PAGE;
           posts = userPosts;
 
