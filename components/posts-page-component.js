@@ -45,7 +45,6 @@ export function renderPostsPageComponent({ appEl }) {
   })
     .join("");
 
-
   const appHtml = `
     <div class="page-container">
       <div class="header-container"></div>
@@ -56,9 +55,7 @@ export function renderPostsPageComponent({ appEl }) {
   `
   appEl.innerHTML = appHtml;
 
-
-  renderLike()
-
+  renderLike();
 
   renderHeaderComponent({
     element: document.querySelector(".header-container"),
@@ -104,7 +101,7 @@ export function renderUserPostsPageComponent(appEl, userId) {
       </div>
       <div class="post-likes">
         <button data-post-id="${userPost.id}" class="like-button">
-        <${userPost.likes.length > 0 ? 'img src="./assets/images/like-active.svg"' : 'img src="./assets/images/like-not-active.svg"'}>
+        <${userPost.isLiked > 0 ? 'img src="./assets/images/like-active.svg"' : 'img src="./assets/images/like-not-active.svg"'}>
         </button>
         <p class="post-likes-text">
           Нравится: <strong>${userPost.likes.length}</strong>
@@ -122,7 +119,6 @@ export function renderUserPostsPageComponent(appEl, userId) {
   })
     .join("");
 
-
   const appHtml = `
     <div class="page-container">
       <div class="header-container"></div>
@@ -134,6 +130,7 @@ export function renderUserPostsPageComponent(appEl, userId) {
 
   appEl.innerHTML = appHtml;
 
+  renderLike();
 
   renderHeaderComponent({
     element: document.querySelector(".header-container"),
