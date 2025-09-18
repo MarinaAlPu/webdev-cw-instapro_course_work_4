@@ -1,4 +1,7 @@
 // Замени на свой, чтобы получить независимый от других набор данных.
+
+import { getToken } from "./index.js";
+
 // "боевая" версия инстапро лежит в ключе prod
 const personalKey = "prod";
 // const personalKey = "marina_pudovkina_key";
@@ -32,7 +35,7 @@ export function getUserPosts({ token }, userId) {
   // console.log("\nЭто userUrl: ", userUrl);
 
   return fetch(postsHost + `/user-posts/${userId}`, {
-  // return fetch(userUrl, {
+    // return fetch(userUrl, {
     method: "GET",
     headers: {
       Authorization: token,
@@ -113,4 +116,30 @@ export function addPost(token, description, pictureUrl) {
     .then((response) => {
       response.json();
     })
+}
+
+export function addLike(postId) {
+  const likeUrl = postsHost + "/" + postId + "/like";
+  return fetch(likeUrl, {
+    method: "POST",
+    headers: {
+      Authorization: getToken(),
+    },
+  })
+  .then((response) => {
+    return response.json();
+  })
+}
+
+export function addDislike(postId) {
+  const likeUrl = postsHost + "/" + postId + "/dislike";
+  return fetch(likeUrl, {
+    method: "POST",
+    headers: {
+      Authorization: getToken(),
+    },
+  })
+  .then((response) => {
+    return response.json();
+  })
 }

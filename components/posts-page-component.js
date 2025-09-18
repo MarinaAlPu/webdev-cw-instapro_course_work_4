@@ -1,6 +1,7 @@
 import { USER_POSTS_PAGE } from "../routes.js";
 import { renderHeaderComponent } from "./header-component.js";
 import { posts, goToPage } from "../index.js";
+import { renderLike } from "./add-like-page-component.js";
 
 export function renderPostsPageComponent({ appEl }) {
   // @TODO: реализовать рендер постов из api
@@ -12,6 +13,9 @@ export function renderPostsPageComponent({ appEl }) {
   */
 
   const postsHtml = posts.map((post) => {
+    // console.log('\nlocalStorage.getItem("currentPostLikes") в функции renderPostsPageComponent:');
+    // console.log(localStorage.getItem("currentPostLikes"));
+
     return `
     <li class="post">
       <div class="post-header" data-user-id="${post.user.id}">
@@ -23,7 +27,7 @@ export function renderPostsPageComponent({ appEl }) {
       </div>
       <div class="post-likes">
         <button data-post-id="${post.id}" class="like-button">
-        <${post.likes.length > 0 ? 'img src="./assets/images/like-active.svg"' : 'img src="./assets/images/like-not-active.svg"'}>
+        <${post.isLiked > 0 ? 'img src="./assets/images/like-active.svg"' : 'img src="./assets/images/like-not-active.svg"'}>
         </button>
         <p class="post-likes-text">
           Нравится: <strong>${post.likes.length}</strong>
@@ -41,7 +45,7 @@ export function renderPostsPageComponent({ appEl }) {
   })
     .join("");
 
-  
+
   const appHtml = `
     <div class="page-container">
       <div class="header-container"></div>
@@ -51,6 +55,9 @@ export function renderPostsPageComponent({ appEl }) {
     </div>
   `
   appEl.innerHTML = appHtml;
+
+
+  renderLike()
 
 
   renderHeaderComponent({
@@ -66,16 +73,16 @@ export function renderPostsPageComponent({ appEl }) {
   }
 }
 
-export function renderUserPostsPageComponent( appEl , userId) {
+export function renderUserPostsPageComponent(appEl, userId) {
   // @TODO: реализовать рендер постов из api
   // console.log("Актуальный список постов в renderUserPostsPageComponent:", posts);
-  
+
   // console.log("\nЭто appEl в функции:");
   // console.log(appEl);
-  
+
   // console.log("\nЭто userId в renderUserPostsPageComponent:");
   // console.log(userId);
-  
+
   const userPostsFiltered = posts.filter((post) => post.user.id === userId);
   // console.log("\nОтфильтрованный список постов юзера в renderUserPostsPageComponent:");
   // console.log(userPostsFiltered);
