@@ -1,0 +1,24 @@
+{
+  "name": "webdev-cw-instapro_course_work_4",
+  "version": "1.0.0",
+  "description": "MVP социальной сети для обмена фотографиями",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --mode development --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarinaAlPu/webdev-cw-instapro_course_work_4.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MarinaAlPu/webdev-cw-instapro_course_work_4/issues"
+  },
+  "homepage": "https://github.com/MarinaAlPu/webdev-cw-instapro_course_work_4#readme",
+  "dependencies": {
+    "date-fns": "^4.1.0",
+    "webpack": "^5.101.3",
+    "webpack-cli": "^6.0.1"
+  }
+}

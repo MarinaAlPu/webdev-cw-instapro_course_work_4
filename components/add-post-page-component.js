@@ -1,6 +1,6 @@
-import { renderHeaderComponent } from "./header-component.js";
-import { renderUploadImageComponent } from "./upload-image-component.js";
-// import { addPost } from "../api.js";
+import { renderHeaderComponent } from "./header-component";
+import { renderUploadImageComponent } from "./upload-image-component";
+// import { addPost } from "../api";
 
 
 export function renderAddPostPageComponent({ appEl, onAddPostClick }) {

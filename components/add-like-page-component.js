@@ -1,6 +1,6 @@
-import { posts, renderApp, updatePosts } from "../index.js";
-import { renderPostsPageComponent } from "./posts-page-component.js";
-import { addDislike, addLike } from "../api.js";
+import { posts, renderApp, updatePosts } from "../index";
+import { renderPostsPageComponent } from "./posts-page-component";
+import { addDislike, addLike } from "../api";
 
 
 export function renderLike() {
