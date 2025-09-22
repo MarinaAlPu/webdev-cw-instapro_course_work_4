@@ -17,14 +17,15 @@ export function renderLike() {
       event.stopPropagation();
 
       // // получить целевой элемент
-      const postTarget = event.target.closest('.like-button');
+      // const postTarget = event.target.closest('.like-button');
       // // console.log("\nЭто целевой элемент: ", postTarget);
 
       // // получить Id поста из лайка
       // // console.log("\nЭто все dataset-атрибуты поста:");
       // // console.log(postTarget.dataset);
-      const postId = postTarget.dataset.postId;
-      // // console.log("\nЭто Id поста: ", postId);
+      // const postId = postTarget.dataset.postId;
+      const postId = likeButton.dataset.postId;
+      // console.log("\nЭто Id поста: ", postId);
 
       // // получить пост по Id поста из массива
       const currentPost = posts.find(post => post.id === postId);
