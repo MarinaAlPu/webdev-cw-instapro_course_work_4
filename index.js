@@ -32,6 +32,10 @@ export const getUserId = () => {
   return userId;
 };
 
+export const updatePosts = (newPosts) => {
+  posts = newPosts;
+};
+
 export const logout = () => {
   user = null;
   removeUserFromLocalStorage();

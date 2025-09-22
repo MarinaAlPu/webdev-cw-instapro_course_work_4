@@ -1,4 +1,4 @@
-import { posts, renderApp } from "../index.js";
+import { posts, renderApp, updatePosts } from "../index.js";
 import { renderPostsPageComponent } from "./posts-page-component.js";
 import { addDislike, addLike } from "../api.js";
 
@@ -6,7 +6,7 @@ import { addDislike, addLike } from "../api.js";
 export function renderLike() {
   // const app = document.getElementById("app");
 
-  console.log("\nСписок постов:");
+  console.log("\nСписок постов в начале renderLike:");
   console.log(posts);
 
   // найти все кнопки like
@@ -36,33 +36,73 @@ export function renderLike() {
       // console.log("\nЭто текущее состояние лайка у текущего поста после смены значения currentPost.isLiked: ", currentPostIsLiked);
       // console.log("\nЭто лайки у текущего поста: ", currentPost.likes);
 
-      let likes;
+      let newPost = {};
+      let likes = [];
+      let likesQuantity;
 
       if (!currentPostIsLiked) {
         addLike(postId)
           .then((response) => {
+            newPost = response.post
             // console.log("\nЭто ответ сервера из функции addLike:");
+            // console.log(newPost);
             // console.log(response);
             // console.log("\nЭто response.post.isLiked из ответа сервера из функции addLike:");
             // console.log(response.post.isLiked);
+            likes = response.post.likes
             // console.log("\nЭто лайки из ответа сервера из функции addLike:");
-            // console.log(response.post.likes);
+            // console.log(likes);
             // console.log(response.post.likes.length);
-            likes = response.post.likes.length
-            console.log("\nЭто лайки после addLike: ", likes);
+            likesQuantity = response.post.likes.length
+            // console.log("\nЭто лайки после addLike: ", likesQuantity);
+
+
+            let newPosts = posts.map(post => {
+              if (post.id === postId) {
+                post = newPost;
+                return post
+              }
+              return post
+            })
+
+            // console.log("\nЭто newPosts в addLike:");
+            // console.log(newPosts);
+
+            updatePosts(newPosts)
+            console.log("\nСписок постов после обновления в addLike:");
+            console.log(posts);
           })
       } else {
         addDislike(postId)
           .then((response) => {
+            newPost = response.post
             // console.log("\nЭто ответ сервера из функции addDislike:");
+            // console.log(newPost);
             // console.log(response);
             // console.log("\nЭто response.post.isLiked из ответа сервера из функции addDislike:");
             // console.log(response.post.isLiked);
+            likes = response.post.likes
             // console.log("\nЭто лайки из ответа сервера из функции addDislike:");
-            // console.log(response.post.likes);
+            // console.log(likes);
             // console.log(response.post.likes.length);
-            likes = response.post.likes.length
-            console.log("\nЭто лайки после addDislike: ", likes);
+            likesQuantity = response.post.likes.length
+            // console.log("\nЭто лайки после addDislike: ", likesQuantity);
+
+
+            let newPosts = posts.map(post => {
+              if (post.id === postId) {
+                post = newPost;
+                return post
+              }
+              return post
+            })
+
+            // console.log("\nЭто newPosts в addDislike:");
+            // console.log(newPosts);
+
+            updatePosts(newPosts)
+            console.log("\nСписок постов после обновления в addDislike:");
+            console.log(posts);
           })
       }
 
