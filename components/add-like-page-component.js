@@ -71,6 +71,8 @@ export function renderLike() {
             updatePosts(newPosts)
             console.log("\nСписок постов после обновления в addLike:");
             console.log(posts);
+
+            renderApp();
           })
       } else {
         addDislike(postId)
@@ -103,13 +105,15 @@ export function renderLike() {
             updatePosts(newPosts)
             console.log("\nСписок постов после обновления в addDislike:");
             console.log(posts);
+            
+            renderApp();
           })
       }
 
       // поменять значение isLiked на противоположное
       currentPost.isLiked = !currentPost.isLiked
 
-      renderApp();
+      // renderApp();
     })
   }
 }
