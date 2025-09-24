@@ -21,8 +21,8 @@ export function renderLike() {
       // // console.log("\nЭто целевой элемент: ", postTarget);
 
       // // получить Id поста из лайка
-      // // console.log("\nЭто все dataset-атрибуты поста:");
-      // // console.log(postTarget.dataset);
+      // console.log("\nЭто все dataset-атрибуты поста:");
+      // console.log(postTarget.dataset);
       // const postId = postTarget.dataset.postId;
       const postId = likeButton.dataset.postId;
       // console.log("\nЭто Id поста: ", postId);
@@ -32,8 +32,9 @@ export function renderLike() {
       // console.log("\nЭто пост, на котором кликнули лайк:");
       // console.log(currentPost);
 
-      const currentPostIsLiked = currentPost.isLiked;
-      // console.log("\nЭто текущее состояние лайка у текущего поста после смены значения currentPost.isLiked: ", currentPostIsLiked);
+      // const currentPostIsLiked = currentPost.isLiked;
+      const currentPostIsLiked = likeButton.dataset.postIsLiked;
+      console.log("\nЭто текущее состояние лайка у текущего поста ДО смены значения currentPost.isLiked: ", currentPostIsLiked);
       // console.log("\nЭто лайки у текущего поста: ", currentPost.likes);
 
       let newPost = {};
@@ -105,7 +106,7 @@ export function renderLike() {
             updatePosts(newPosts)
             console.log("\nСписок постов после обновления в addDislike:");
             console.log(posts);
-            
+
             renderApp();
           })
       }
