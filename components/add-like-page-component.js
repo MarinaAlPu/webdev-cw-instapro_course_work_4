@@ -6,8 +6,8 @@ import { addDislike, addLike } from "../api";
 export function renderLike() {
   // const app = document.getElementById("app");
 
-  console.log("\nСписок постов в начале renderLike:");
-  console.log(posts);
+  // console.log("\nСписок постов в начале renderLike:");
+  // console.log(posts);
 
   // найти все кнопки like
   const likeButtons = document.querySelectorAll(".like-button");
@@ -33,8 +33,8 @@ export function renderLike() {
       // console.log(currentPost);
 
       // const currentPostIsLiked = currentPost.isLiked;
-      const currentPostIsLiked = likeButton.dataset.postIsLiked;
-      console.log("\nЭто текущее состояние лайка у текущего поста ДО смены значения currentPost.isLiked: ", currentPostIsLiked);
+      const currentPostIsLiked = likeButton.dataset.postIsLiked === 'true';
+      // console.log("\nЭто текущее состояние лайка у текущего поста ДО смены значения currentPost.isLiked: ", currentPostIsLiked);
       // console.log("\nЭто лайки у текущего поста: ", currentPost.likes);
 
       let newPost = {};
@@ -70,8 +70,8 @@ export function renderLike() {
             // console.log(newPosts);
 
             updatePosts(newPosts)
-            console.log("\nСписок постов после обновления в addLike:");
-            console.log(posts);
+            // console.log("\nСписок постов после обновления в addLike:");
+            // console.log(posts);
 
             renderApp();
           })
@@ -104,8 +104,8 @@ export function renderLike() {
             // console.log(newPosts);
 
             updatePosts(newPosts)
-            console.log("\nСписок постов после обновления в addDislike:");
-            console.log(posts);
+            // console.log("\nСписок постов после обновления в addDislike:");
+            // console.log(posts);
 
             renderApp();
           })
