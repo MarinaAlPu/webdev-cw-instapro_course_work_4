@@ -16,6 +16,9 @@ export function renderLike() {
     likeButton.addEventListener("click", (event) => {
       event.stopPropagation();
 
+      // добавить класс для анимации, убрать в finally
+      likeButton.classList.add('loading-like');
+
       // // получить целевой элемент
       // const postTarget = event.target.closest('.like-button');
       // // console.log("\nЭто целевой элемент: ", postTarget);
@@ -75,6 +78,9 @@ export function renderLike() {
 
             renderApp();
           })
+          .finally(() => {
+            likeButton.classList.remove('loading-like');
+          });
       } else {
         addDislike(postId)
           .then((response) => {
@@ -109,6 +115,9 @@ export function renderLike() {
 
             renderApp();
           })
+          .finally(() => {
+            likeButton.classList.remove('loading-like');
+          });
       }
 
       // поменять значение isLiked на противоположное
