@@ -98,7 +98,7 @@ export const goToPage = (newPage, data) => {
           page = USER_POSTS_PAGE;
           posts = userPosts;
 
-          renderUserPostsPageComponent(appEl, data.userId);
+          // renderUserPostsPageComponent(appEl, data.userId); // лишний вызов, есть в renderApp()
           renderApp();
         })
         .catch((error) => {

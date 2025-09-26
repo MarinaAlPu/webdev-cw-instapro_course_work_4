@@ -72,7 +72,7 @@ export function renderPostsPageComponent({ appEl }) {
   }
 }
 
-export function renderUserPostsPageComponent(appEl, userId) {
+export function renderUserPostsPageComponent(appEl) {
   // @TODO: реализовать рендер постов из api
   // console.log("Актуальный список постов в renderUserPostsPageComponent:", posts);
 
@@ -82,7 +82,7 @@ export function renderUserPostsPageComponent(appEl, userId) {
   // console.log("\nЭто userId в renderUserPostsPageComponent:");
   // console.log(userId);
 
-  const userPostsFiltered = posts.filter((post) => post.user.id === userId);
+  // const userPostsFiltered = posts.filter((post) => post.user.id === userId); // не фильтровать, уже приходжит отфильтрованный из goToPage -> getUserPosts (posts = userPosts)
   // console.log("\nОтфильтрованный список постов юзера в renderUserPostsPageComponent:");
   // console.log(userPostsFiltered);
 
@@ -91,7 +91,7 @@ export function renderUserPostsPageComponent(appEl, userId) {
    * можно использовать https://date-fns.org/v2.29.3/docs/formatDistanceToNow
   */
 
-  const userPostsHtml = userPostsFiltered.map((userPost) => {
+  const userPostsHtml = posts.map((userPost) => {
     return `
     <li class="post">
       <div class="post-header" data-user-id="${userPost.user.id}">
@@ -102,7 +102,7 @@ export function renderUserPostsPageComponent(appEl, userId) {
         <img class="post-image" src="${userPost.imageUrl}">
       </div>
       <div class="post-likes">
-        <button data-post-id="${userPost.id}" class="like-button">
+        <button data-post-id="${userPost.id}" data-post-is-liked="${userPost.isLiked}" class="like-button">
         <${userPost.isLiked > 0 ? 'img src="./assets/images/like-active.svg"' : 'img src="./assets/images/like-not-active.svg"'}>
         </button>
         <p class="post-likes-text">
@@ -114,7 +114,7 @@ export function renderUserPostsPageComponent(appEl, userId) {
         ${userPost.description}
       </p>
       <p class="post-date">
-        19 минут назад
+        ${formatDistanceToNow(userPost.createdAt, { addSuffix: true, locale: ru })}
       </p>
     </li>
   `
