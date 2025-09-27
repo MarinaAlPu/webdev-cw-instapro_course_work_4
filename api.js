@@ -116,8 +116,20 @@ export function addPost(token, description, pictureUrl) {
     .then((response) => {
       if (response.status === 400) {
         // console.log(response);
-        throw new Error("Не добавлена фотография или текст");
+        let errorMessage;
+        if (!description) {
+          // alert("Добавьте описание поста");
+          errorMessage = "Добавьте описание поста";
+        }
+        
+        if (!pictureUrl) {
+          // alert("Добавьте фотографию");
+          errorMessage = "Добавьте фотографию";
+        }
+        throw new Error(errorMessage);
       }
+
+
       response.json();
     })
 }
