@@ -147,16 +147,11 @@ export const renderApp = () => {
         // @TODO: реализовать добавление поста в API
         // console.log("Добавляю пост...", { description, imageUrl });
 
-        goToPage(POSTS_PAGE);
 
-        // console.log("\nТокен:");
-        // console.log(getToken());
-        // console.log("\nОписание:");
-        // console.log(description);
-        // console.log("\nКартинка:");
-        // console.log(imageUrl);
-
-        addPost(getToken(), description, imageUrl);
+        addPost(getToken(), description, imageUrl)
+          .then(() => {
+            goToPage(POSTS_PAGE);
+          });
       },
     });
   }
