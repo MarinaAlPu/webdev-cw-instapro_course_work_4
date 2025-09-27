@@ -114,6 +114,10 @@ export function addPost(token, description, pictureUrl) {
     body: JSON.stringify(body),
   })
     .then((response) => {
+      if (response.status === 400) {
+        // console.log(response);
+        throw new Error("Не добавлена фотография или текст");
+      }
       response.json();
     })
 }
@@ -126,9 +130,16 @@ export function addLike(postId) {
       Authorization: getToken(),
     },
   })
-  .then((response) => {
-    return response.json();
-  })
+    .then((response) => {
+      if (response.status === 401) {
+        // throw new Error("Чтобы лайкнуть пост необходимо авторизоваться");
+        alert(`Ошибка: Чтобы лайкнуть пост необходимо авторизоваться`)
+      }
+      return response.json();
+    })
+    .catch((error => {
+      console.log(error.message);
+    }))
 }
 
 export function addDislike(postId) {
@@ -139,7 +150,7 @@ export function addDislike(postId) {
       Authorization: getToken(),
     },
   })
-  .then((response) => {
-    return response.json();
-  })
+    .then((response) => {
+      return response.json();
+    })
 }

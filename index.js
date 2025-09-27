@@ -151,7 +151,11 @@ export const renderApp = () => {
         addPost(getToken(), description, imageUrl)
           .then(() => {
             goToPage(POSTS_PAGE);
-          });
+          })
+          .catch((error) => {
+            // console.log("\nОшибка при добавлении поста: ", error.message);
+            alert(`Ошибка при добавлении поста: ${error.message}`);
+          })
       },
     });
   }
