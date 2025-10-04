@@ -20,6 +20,9 @@ export function renderPostsPageComponent({ appEl }) {
     // console.log(localStorage.getItem("currentPostLikes"));
 
     let messageForLike = "";
+    let likesList = "";
+    let list = "";
+    let item = "";
 
     // const postLikes = post.likes;
     // console.log(postLikes);
@@ -29,9 +32,38 @@ export function renderPostsPageComponent({ appEl }) {
       messageForLike = post.likes.length;
     } else if (post.likes.length === 1) {
       messageForLike = post.likes[0].name;
+      list;
+      item = `
+        <li>
+          ${post.likes[0].name}
+        </li>
+        `
+
+      likesList = `
+        <div class="post-likes-list" >
+          <ul>
+            ${item}
+          </ul>
+        </div>
+        `
     } else if (post.likes.length > 0) {
       // messageForLike = post.likes[0].name + " и " + (post.likes.length - 1) + " другим пользователям";
       messageForLike = post.likes[0].name + " и другим";
+
+      // list;
+      // item = `
+      //   <li>
+
+      //   </li>
+      // `
+
+      // likesList = `
+      //   <div class="post-likes-list">
+      //     <ul>
+      //       ${list}
+      //     </ul>
+      //   </div>
+      // `
     }
 
     let deleteButton;
@@ -72,8 +104,9 @@ export function renderPostsPageComponent({ appEl }) {
           <${post.isLiked > 0 ? 'img src="./assets/images/like-active.svg"' : 'img src="./assets/images/like-not-active.svg"'}>
           </button>
           <p class="post-likes-text">
-            Нравится: <strong>${messageForLike}</strong>
+          Нравится: <strong>${messageForLike}</strong>
           </p>
+          ${likesList}
         </div>
         ${post.user.id === userId ? deleteButton : ""}
       </div>
@@ -98,6 +131,16 @@ export function renderPostsPageComponent({ appEl }) {
     </div>
   `
   appEl.innerHTML = appHtml;
+
+  const postLikesLists = document.querySelectorAll(".post-likes-text");
+
+  for (const postLikesList of postLikesLists) {
+    postLikesList.addEventListener("mouseover", () => {
+      console.log("Навели курсор на текст");
+
+
+    })
+  }
 
   renderLike();
   renderDeletePost();

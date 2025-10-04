@@ -237,3 +237,26 @@
   flex-direction: row;
   justify-content: space-between;
 }
+
+.post-likes-text {
+  position: relative;
+}
+
+/* .post-text {
+  position: relative;
+} */
+
+.post-likes-list {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+    background-color: #f6f6f6;
+    box-shadow: 12px 12px 2px 1px rgba(111, 111, 111, 0.1);
+    display: block;
+    z-index: 2;
+    /* top: 544px; */
+    /* left: 50px; */
+    /* right: 0; */
+    bottom: 0;
+}
