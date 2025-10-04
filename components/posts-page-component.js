@@ -15,18 +15,47 @@ export function renderPostsPageComponent({ appEl }) {
    * можно использовать https://date-fns.org/v2.29.3/docs/formatDistanceToNow
   */
 
-  let userId = getUserId();
-  // console.log("Это userId: ", userId);
-
   const postsHtml = posts.map((post) => {
     // console.log('\nlocalStorage.getItem("currentPostLikes") в функции renderPostsPageComponent:');
     // console.log(localStorage.getItem("currentPostLikes"));
 
-    const deleteButton = `
-    <div class="post-delete">
-        <button data-post-id="${post.id}" class="header-button delete-button">Удалить</button>
-    </div>
-    `
+    let messageForLike = "";
+
+    // const postLikes = post.likes;
+    // console.log(postLikes);
+    //   console.log("Количество лайков: ", post.likes.length);
+
+    if (post.likes.length === 0) {
+      messageForLike = post.likes.length;
+    } else if (post.likes.length === 1) {
+      messageForLike = post.likes[0].name;
+    } else if (post.likes.length > 0) {
+      // messageForLike = post.likes[0].name + " и " + (post.likes.length - 1) + " другим пользователям";
+      messageForLike = post.likes[0].name + " и другим";
+    }
+
+    let deleteButton;
+    // let deleteButton = `
+    // <div class="post-delete">
+    //     <button data-post-id="${post.id}" class="header-button delete-button">Удалить</button>
+    // </div>
+    // `
+
+    let userId = getUserId();
+
+    if (!getUserId()) {
+      // console.log(userId);
+      // console.log("Пользователь не залогинен, в localStorage отсутствует userId");
+      deleteButton = "";
+    } else {
+      // userId = getUserId();
+      deleteButton = `
+        <div class="post-delete">
+          <button data-post-id="${post.id}" class="header-button delete-button">Удалить</button>
+        </div>
+        `
+    }
+    // console.log("Это userId: ", userId);
 
     return `
     <li class="post">
@@ -43,7 +72,7 @@ export function renderPostsPageComponent({ appEl }) {
           <${post.isLiked > 0 ? 'img src="./assets/images/like-active.svg"' : 'img src="./assets/images/like-not-active.svg"'}>
           </button>
           <p class="post-likes-text">
-            Нравится: <strong>${post.likes.length}</strong>
+            Нравится: <strong>${messageForLike}</strong>
           </p>
         </div>
         ${post.user.id === userId ? deleteButton : ""}
@@ -105,6 +134,35 @@ export function renderUserPostsPageComponent(appEl) {
   */
 
   const userPostsHtml = posts.map((userPost) => {
+    let messageForLike = "";
+
+    if (userPost.likes.length === 0) {
+      messageForLike = userPost.likes.length;
+    } else if (userPost.likes.length === 1) {
+      messageForLike = userPost.likes[0].name;
+    } else if (userPost.likes.length > 0) {
+      // messageForLike = post.likes[0].name + " и " + (post.likes.length - 1) + " другим пользователям";
+      messageForLike = userPost.likes[0].name + " и другим";
+    }
+
+    let deleteButton;
+
+    let userId = getUserId();
+
+    if (!getUserId()) {
+      // console.log(userId);
+      // console.log("Пользователь не залогинен, в localStorage отсутствует userId");
+      deleteButton = "";
+    } else {
+      // userId = getUserId();
+      deleteButton = `
+        <div class="post-delete">
+          <button data-post-id="${userPost.id}" class="header-button delete-button">Удалить</button>
+        </div>
+        `
+    }
+    // console.log("Это userId: ", userId);
+
     return `
     <li class="post">
       <div class="post-header" data-user-id="${userPost.user.id}">
@@ -120,12 +178,10 @@ export function renderUserPostsPageComponent(appEl) {
           <${userPost.isLiked > 0 ? 'img src="./assets/images/like-active.svg"' : 'img src="./assets/images/like-not-active.svg"'}>
           </button>
           <p class="post-likes-text">
-            Нравится: <strong>${userPost.likes.length}</strong>
+            Нравится: <strong>${messageForLike}</strong>
           </p>
         </div>
-        <div class="post-delete">
-          <button data-post-id="${userPost.id}" class="header-button delete-button">Удалить</button>
-        </div>
+        ${userPost.user.id === userId ? deleteButton : ""}
       </div>
       <p class="post-text">
         <span class="user-name">${userPost.user.name}</span>

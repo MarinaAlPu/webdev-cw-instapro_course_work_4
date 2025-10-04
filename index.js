@@ -26,10 +26,19 @@ export const getToken = () => {
 };
 
 export const getUserId = () => {
+    try {
+    const user = JSON.parse(localStorage.getItem("user"));
+    // return user && user._id ? user._id : null;
+    return user ? user._id : null;
+  } catch (error) {
+    // console.error("Ошибка при получении userId:", error);
+    return null;
+  }
+
   // console.log(user);
   // console.log(user._id);
-  const userId = user._id;
-  return userId;
+  // const userId = user._id;
+  // return userId ? JSON.parse(user).id : null;
 };
 
 export const updatePosts = (newPosts) => {
