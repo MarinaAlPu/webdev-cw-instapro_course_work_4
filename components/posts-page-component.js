@@ -16,63 +16,30 @@ export function renderPostsPageComponent({ appEl }) {
   */
 
   const postsHtml = posts.map((post) => {
-    // console.log('\nlocalStorage.getItem("currentPostLikes") в функции renderPostsPageComponent:');
-    // console.log(localStorage.getItem("currentPostLikes"));
-
     let messageForLike = "";
-    // let likesList = "";
-    // let list = "";
-    // let item = "";
-
-    // const postLikes = post.likes;
-    // console.log(postLikes);
-    //   console.log("Количество лайков: ", post.likes.length);
 
     if (post.likes.length === 0) {
       messageForLike = post.likes.length;
     } else if (post.likes.length === 1) {
       messageForLike = post.likes[0].name;
-      // list;
-      // item = `
-      //   <li>
-      //     ${post.likes[0].name}
-      //   </li>
-      //   `
-
-      // likesList = `
-      //   <div class="post-likes-list" >
-      //     <ul>
-      //       ${item}
-      //     </ul>
-      //   </div>
-      //   `
     } else if (post.likes.length > 0) {
       // messageForLike = post.likes[0].name + " и " + (post.likes.length - 1) + " другим пользователям";
       messageForLike = post.likes[0].name + " и другим";
     }
 
     let deleteButton;
-    // let deleteButton = `
-    // <div class="post-delete">
-    //     <button data-post-id="${post.id}" class="header-button delete-button">Удалить</button>
-    // </div>
-    // `
 
     let userId = getUserId();
 
     if (!getUserId()) {
-      // console.log(userId);
-      // console.log("Пользователь не залогинен, в localStorage отсутствует userId");
       deleteButton = "";
     } else {
-      // userId = getUserId();
       deleteButton = `
         <div class="post-delete">
           <button data-post-id="${post.id}" class="header-button delete-button">Удалить</button>
         </div>
         `
     }
-    // console.log("Это userId: ", userId);
 
     return `
     <li class="post">
@@ -116,16 +83,6 @@ export function renderPostsPageComponent({ appEl }) {
   `
   appEl.innerHTML = appHtml;
 
-  // const postLikesLists = document.querySelectorAll(".post-likes-text");
-
-  // for (const postLikesList of postLikesLists) {
-  //   postLikesList.addEventListener("mouseover", () => {
-  //     console.log("Навели курсор на текст");
-
-
-  //   })
-  // }
-
   renderLike();
   renderDeletePost();
   renderHeaderComponent({
@@ -144,16 +101,6 @@ export function renderPostsPageComponent({ appEl }) {
 export function renderUserPostsPageComponent(appEl) {
   // @TODO: реализовать рендер постов из api
   // console.log("Актуальный список постов в renderUserPostsPageComponent:", posts);
-
-  // console.log("\nЭто appEl в функции:");
-  // console.log(appEl);
-
-  // console.log("\nЭто userId в renderUserPostsPageComponent:");
-  // console.log(userId);
-
-  // const userPostsFiltered = posts.filter((post) => post.user.id === userId); // не фильтровать, уже приходжит отфильтрованный из goToPage -> getUserPosts (posts = userPosts)
-  // console.log("\nОтфильтрованный список постов юзера в renderUserPostsPageComponent:");
-  // console.log(userPostsFiltered);
 
   /**
    * @TODO: чтобы отформатировать дату создания поста в виде "19 минут назад"
@@ -177,18 +124,14 @@ export function renderUserPostsPageComponent(appEl) {
     let userId = getUserId();
 
     if (!getUserId()) {
-      // console.log(userId);
-      // console.log("Пользователь не залогинен, в localStorage отсутствует userId");
       deleteButton = "";
     } else {
-      // userId = getUserId();
       deleteButton = `
         <div class="post-delete">
           <button data-post-id="${userPost.id}" class="header-button delete-button">Удалить</button>
         </div>
         `
     }
-    // console.log("Это userId: ", userId);
 
     return `
     <li class="post">

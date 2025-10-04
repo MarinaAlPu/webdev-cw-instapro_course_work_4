@@ -169,11 +169,6 @@ export function addDislike(postId) {
 
 
 export function deletePost(token, postId) {
-  // console.log("Url для удаления поста");
-  // console.log(postsHost + "/" + postId);
-
-  // console.log("Это token: ", token);
-
   return fetch(postsHost + "/" + postId, {
     method: "DELETE",
     headers: {
@@ -181,16 +176,9 @@ export function deletePost(token, postId) {
     },
   })
     .then((response) => {
-      // console.log("Это response: ", response);
-      // console.log(response);
-      // if (response.status !== 200) {
-      //   throw new Error("Ошибка при удалении поста");
-      //   // return response.error
-      // }
       return response.json();
     })
     .catch((error) => {
       console.log("Это ошибка: ", error);
-      // return error
     })
 }

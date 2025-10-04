@@ -34,11 +34,6 @@ export const getUserId = () => {
     // console.error("Ошибка при получении userId:", error);
     return null;
   }
-
-  // console.log(user);
-  // console.log(user._id);
-  // const userId = user._id;
-  // return userId ? JSON.parse(user).id : null;
 };
 
 export const updatePosts = (newPosts) => {
