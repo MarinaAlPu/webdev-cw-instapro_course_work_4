@@ -34,8 +34,8 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
 
     document.getElementById("add-button").addEventListener("click", () => {
       const postEl = document.getElementById("postText");
-      const postDescription = postEl.value;
-
+      // const postDescription = postEl.value;
+      const postDescription = (postEl.value).replaceAll("<", "&lt").replaceAll(">", "&gt");
 
       onAddPostClick({
         // description: "Описание картинки",
