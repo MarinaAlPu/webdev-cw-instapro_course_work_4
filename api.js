@@ -121,7 +121,7 @@ export function addPost(token, description, pictureUrl) {
           // alert("Добавьте описание поста");
           errorMessage = "Добавьте описание поста";
         }
-        
+
         if (!pictureUrl) {
           // alert("Добавьте фотографию");
           errorMessage = "Добавьте фотографию";
@@ -164,5 +164,33 @@ export function addDislike(postId) {
   })
     .then((response) => {
       return response.json();
+    })
+}
+
+
+export function deletePost(token, postId) {
+  // console.log("Url для удаления поста");
+  // console.log(postsHost + "/" + postId);
+
+  // console.log("Это token: ", token);
+
+  return fetch(postsHost + "/" + postId, {
+    method: "DELETE",
+    headers: {
+      Authorization: token,
+    },
+  })
+    .then((response) => {
+      // console.log("Это response: ", response);
+      // console.log(response);
+      // if (response.status !== 200) {
+      //   throw new Error("Ошибка при удалении поста");
+      //   // return response.error
+      // }
+      return response.json();
+    })
+    .catch((error) => {
+      console.log("Это ошибка: ", error);
+      // return error
     })
 }

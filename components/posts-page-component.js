@@ -4,6 +4,7 @@ import { posts, goToPage } from "../index";
 import { renderLike } from "./add-like-page-component";
 import { formatDistanceToNow } from "date-fns";
 import { ru } from 'date-fns/locale';
+import { renderDeletePost } from "./delete-post-page-component";
 
 export function renderPostsPageComponent({ appEl }) {
   // @TODO: реализовать рендер постов из api
@@ -18,6 +19,12 @@ export function renderPostsPageComponent({ appEl }) {
     // console.log('\nlocalStorage.getItem("currentPostLikes") в функции renderPostsPageComponent:');
     // console.log(localStorage.getItem("currentPostLikes"));
 
+    const deleteButton = `
+    <div class="post-delete">
+        <button data-post-id="${post.id}" class="header-button delete-button">Удалить</button>
+    </div>
+    `
+
     return `
     <li class="post">
       <div class="post-header" data-user-id="${post.user.id}">
@@ -27,13 +34,16 @@ export function renderPostsPageComponent({ appEl }) {
       <div class="post-image-container">
         <img class="post-image" src="${post.imageUrl}">
       </div>
-      <div class="post-likes">
-        <button data-post-id="${post.id}" data-post-is-liked="${post.isLiked}" class="like-button">
-        <${post.isLiked > 0 ? 'img src="./assets/images/like-active.svg"' : 'img src="./assets/images/like-not-active.svg"'}>
-        </button>
-        <p class="post-likes-text">
-          Нравится: <strong>${post.likes.length}</strong>
-        </p>
+      <div class="post-footer">
+        <div class="post-likes">
+          <button data-post-id="${post.id}" data-post-is-liked="${post.isLiked}" class="like-button">
+          <${post.isLiked > 0 ? 'img src="./assets/images/like-active.svg"' : 'img src="./assets/images/like-not-active.svg"'}>
+          </button>
+          <p class="post-likes-text">
+            Нравится: <strong>${post.likes.length}</strong>
+          </p>
+        </div>
+        ${post.user.id !== "" ? deleteButton : ""}
       </div>
       <p class="post-text">
         <span class="user-name">${post.user.name}</span>
@@ -58,6 +68,8 @@ export function renderPostsPageComponent({ appEl }) {
   appEl.innerHTML = appHtml;
 
   renderLike();
+
+  renderDeletePost();
 
   renderHeaderComponent({
     element: document.querySelector(".header-container"),
@@ -91,6 +103,12 @@ export function renderUserPostsPageComponent(appEl) {
    * можно использовать https://date-fns.org/v2.29.3/docs/formatDistanceToNow
   */
 
+  const deleteButton = `
+    <div class="post-delete">
+        <button data-post-id="${userPost.id}" class="header-button delete-button">Удалить</button>
+    </div>
+    `
+
   const userPostsHtml = posts.map((userPost) => {
     return `
     <li class="post">
@@ -101,13 +119,16 @@ export function renderUserPostsPageComponent(appEl) {
       <div class="post-image-container">
         <img class="post-image" src="${userPost.imageUrl}">
       </div>
-      <div class="post-likes">
-        <button data-post-id="${userPost.id}" data-post-is-liked="${userPost.isLiked}" class="like-button">
-        <${userPost.isLiked > 0 ? 'img src="./assets/images/like-active.svg"' : 'img src="./assets/images/like-not-active.svg"'}>
-        </button>
-        <p class="post-likes-text">
-          Нравится: <strong>${userPost.likes.length}</strong>
-        </p>
+      <div class="post-footer">
+        <div class="post-likes">
+          <button data-post-id="${userPost.id}" data-post-is-liked="${userPost.isLiked}" class="like-button">
+          <${userPost.isLiked > 0 ? 'img src="./assets/images/like-active.svg"' : 'img src="./assets/images/like-not-active.svg"'}>
+          </button>
+          <p class="post-likes-text">
+            Нравится: <strong>${userPost.likes.length}</strong>
+          </p>
+        </div>
+        ${userPost.user.id !== "" ? deleteButton : ""}
       </div>
       <p class="post-text">
         <span class="user-name">${userPost.user.name}</span>
