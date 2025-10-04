@@ -1,6 +1,6 @@
 import { USER_POSTS_PAGE } from "../routes";
 import { renderHeaderComponent } from "./header-component";
-import { posts, goToPage } from "../index";
+import { posts, goToPage, getUserId } from "../index";
 import { renderLike } from "./add-like-page-component";
 import { formatDistanceToNow } from "date-fns";
 import { ru } from 'date-fns/locale';
@@ -14,6 +14,9 @@ export function renderPostsPageComponent({ appEl }) {
    * @TODO: чтобы отформатировать дату создания поста в виде "19 минут назад"
    * можно использовать https://date-fns.org/v2.29.3/docs/formatDistanceToNow
   */
+
+  let userId = getUserId();
+  // console.log("Это userId: ", userId);
 
   const postsHtml = posts.map((post) => {
     // console.log('\nlocalStorage.getItem("currentPostLikes") в функции renderPostsPageComponent:');
@@ -43,7 +46,7 @@ export function renderPostsPageComponent({ appEl }) {
             Нравится: <strong>${post.likes.length}</strong>
           </p>
         </div>
-        ${post.user.id !== "" ? deleteButton : ""}
+        ${post.user.id === userId ? deleteButton : ""}
       </div>
       <p class="post-text">
         <span class="user-name">${post.user.name}</span>
@@ -68,9 +71,7 @@ export function renderPostsPageComponent({ appEl }) {
   appEl.innerHTML = appHtml;
 
   renderLike();
-
   renderDeletePost();
-
   renderHeaderComponent({
     element: document.querySelector(".header-container"),
   });
@@ -103,12 +104,6 @@ export function renderUserPostsPageComponent(appEl) {
    * можно использовать https://date-fns.org/v2.29.3/docs/formatDistanceToNow
   */
 
-  const deleteButton = `
-    <div class="post-delete">
-        <button data-post-id="${userPost.id}" class="header-button delete-button">Удалить</button>
-    </div>
-    `
-
   const userPostsHtml = posts.map((userPost) => {
     return `
     <li class="post">
@@ -128,7 +123,9 @@ export function renderUserPostsPageComponent(appEl) {
             Нравится: <strong>${userPost.likes.length}</strong>
           </p>
         </div>
-        ${userPost.user.id !== "" ? deleteButton : ""}
+        <div class="post-delete">
+          <button data-post-id="${userPost.id}" class="header-button delete-button">Удалить</button>
+        </div>
       </div>
       <p class="post-text">
         <span class="user-name">${userPost.user.name}</span>
@@ -154,7 +151,7 @@ export function renderUserPostsPageComponent(appEl) {
   appEl.innerHTML = appHtml;
 
   renderLike();
-
+  renderDeletePost();
   renderHeaderComponent({
     element: document.querySelector(".header-container"),
   });
