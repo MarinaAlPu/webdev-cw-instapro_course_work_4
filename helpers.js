@@ -2,10 +2,13 @@ export function saveUserToLocalStorage(user) {
   window.localStorage.setItem("user", JSON.stringify(user));
 }
 
-export function getUserFromLocalStorage(user) {
+// export function getUserFromLocalStorage(user) {
+export function getUserFromLocalStorage() {
   try {
-    return JSON.parse(window.localStorage.getItem("user"));
+    const user = JSON.parse(window.localStorage.getItem("user"));
+    return userData ? JSON.parse(user) : null;
   } catch (error) {
+    // console.log("Пользователь не залогинен");
     return null;
   }
 }
