@@ -22,9 +22,16 @@ export function renderPostsPageComponent({ appEl }) {
       messageForLike = post.likes.length;
     } else if (post.likes.length === 1) {
       messageForLike = post.likes[0].name;
-    } else if (post.likes.length > 0) {
-      // messageForLike = post.likes[0].name + " и " + (post.likes.length - 1) + " другим пользователям";
-      messageForLike = post.likes[0].name + " и другим";
+    } else if (post.likes.length > 1) {
+      if (post.likes.length - 1 === 1 || String(post.likes.length - 1).endsWith("1") && post.likes.length - 1 !== 11) {
+        messageForLike = post.likes[0].name + " и ещё " + (post.likes.length - 1) + " пользователю";
+      } else {
+        messageForLike = post.likes[0].name + " и ещё " + (post.likes.length - 1) + " пользователям";
+      }
+
+      // // messageForLike = userPost.likes[0].name + " и " + (userPost.likes.length - 1) + " другим пользователям";
+      // messageForLike = userPost.likes[0].name + " и ещё " + (userPost.likes.length - 1) + " пользователям";
+      // // messageForLike = userPost.likes[0].name + " и другим";
     }
 
     let deleteButton;
@@ -114,9 +121,16 @@ export function renderUserPostsPageComponent(appEl) {
       messageForLike = userPost.likes.length;
     } else if (userPost.likes.length === 1) {
       messageForLike = userPost.likes[0].name;
-    } else if (userPost.likes.length > 0) {
-      // messageForLike = post.likes[0].name + " и " + (post.likes.length - 1) + " другим пользователям";
-      messageForLike = userPost.likes[0].name + " и другим";
+    } else if (userPost.likes.length > 1) {
+      if (userPost.likes.length - 1 === 1 || String(userPost.likes.length - 1).endsWith("1") && userPost.likes.length - 1 !== 11) {
+        messageForLike = userPost.likes[0].name + " и ещё " + (userPost.likes.length - 1) + " пользователю";
+      } else {
+        messageForLike = userPost.likes[0].name + " и ещё " + (userPost.likes.length - 1) + " пользователям";
+      }
+
+      // // messageForLike = userPost.likes[0].name + " и " + (userPost.likes.length - 1) + " другим пользователям";
+      // messageForLike = userPost.likes[0].name + " и ещё " + (userPost.likes.length - 1) + " пользователям";
+      // // messageForLike = userPost.likes[0].name + " и другим";
     }
 
     let deleteButton;
